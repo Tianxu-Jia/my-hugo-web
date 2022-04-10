@@ -12,6 +12,7 @@ ignoreFiles:
   - \.utf8\.md$
 permalinks:
   post: /:year/:month/:day/:slug/
+  page: /:title/
 menu:
   main:
     - name: About
