@@ -2,6 +2,8 @@
 title: "The Churn Model in Practice"
 author: "Tianxu Jia"
 date: 2022-04-08T21:13:14-05:00
+toc: true
+toc_float: true
 bibliography: references.bib
 ---
 
@@ -10,17 +12,15 @@ knitr::opts_chunk$set(collapse = TRUE)
 ```
 
 
-Abstruct
-==================================================================================
-
+#### Abstruct
+<div style="margin-left:5%;">
 In this article, we first analyze the limitations of the generic churn model through an user case story, based on that the churn model and marketing intervention system is proposed. This system not only forescast the churn of coustomer, the most importantly, it can provide the solution of how to intervene the coustomer and retain the costomer. After all, retaining customers and creating market value at a reasonable cost is one of the most important purposes of building a churn model. In the second part, we analyze all the challenges in building a customer churn and how to find the optimal intervention action. In the last part, the solutions to these challenges are given out.
+</div>
 
 
+# 1. What is churn model?
 
-
-# What is churn model?
-
-
+<div style="margin-left:5%;">
 If you check on google about the churn model, mostly you will find that building a churn model is to forecast which client will leave or not. There was a Kaggle challenge project about the churn model. Client churn was to be forecasted based on historical data.
 
 Make a future teller cristle seems fabulus! 
@@ -71,11 +71,13 @@ Classify customers into 4 groups
 For the first class of customers, it is optimal that we don't do anything. For the second and third classes of customers, any intervention and persuasion will be worthless. Only the fourth category of customers, we need to intervene.
 
 So, the churn model should be a system that includes two parts: forecast and intervene. The forecast part identify who needs intervension and the intervention part determines the best intervention decision 
+</div>
 
-# The Challenges of Churm Model
 
-## 1. Forecast and Causation
+# 2. The Challenges of Churm Model
 
+## 2.1 Forecast and Causation
+<div style="margin-left:5%;">
 The four classification prediction in churn model is a trivial problem in machine learning. We have many mature machine learning algorithms for that. The real challenge is that for customers who can be persuaded, how we make an intervention. For understand the challenge, we need to understand the basic idea of forecast in machine learning, and what it means when we say intervention. How to use reasoning language to describe the doctor's intervention in the patient's course of disease.
 
 
@@ -95,8 +97,8 @@ Let's come back to our churn model problem. We hope to retain customers through 
 <p><strong>The first Challenge: Identify the causation of retaining customer.</strong></p>
 </div>
 
-## 2. Observation and experimentation
-<div style="margin-left:5%; margin-right:5%;">
+## 2.2 Observation and experimentation
+<div style="margin-left:5%;">
 From the process of data generation, it can be divided into observation data and experimental data.
 
 Experimental data refers to the data we can obtain by controlling the experimental process and repeating experiments. For example, nearly all physical and chemical experiments data. Causal reasoning is usually easier for it. We can control one variable and observe the change of another variable to infer whether there is a causal effect between them, and this kind of experiment can be observed and measured repeatedly. For example, we can control the cock's crowing and observe whether the sun rises. From that, we infer whether there is a causality between the cock crowing and the sun rising. In the object motion experiment, we can control the force applied to the object and observe the change in its acceleration to infer the causal relationship between force and acceleration.
@@ -110,7 +112,7 @@ The causal reasoning of observed data will become very difficult, and sometimes 
 </div>
     
 
-## 3. Intervention and Counterfactual
+## 2.3 Intervention and Counterfactual
 
 <div style="margin-left:5%; margin-right:5%;">
     
@@ -125,15 +127,16 @@ How to make decision of intervension? Like always, we knowledge is from out past
 <p><strong>The thrid Challenge: Counterfactural inferencing based the event that doesn't exist.</strong></p>                  
 
 
-# solutions to the the Challenges
-
+# 3. solutions to the the Challenges
+<div style="margin-left:5%; margin-right:5%;">
 Whether regression or classification, machine learning attempts to find the functional mapping relationship between input and output. Function mapping is essentially a kind of correlation, not causality. The aim of building churn model in business is to intervene and retain customers. Therefore, it is important to study causality and predict the consequences of intervention.
 
 Causality and intervention is an ancient problem in long history. Countless sages spent their lives trying to find some causalities. Newton discovered the causal relationship between force and acceleration. Galileo proved that the falling speed of an object has nothing to do with the mass of it through the Leaning Tower experiment of Pisa. Unfortunately, until recently, the mathematical representation of causal reasoning and intervention was put forward, and from that the the set of strict mathematical theories and methods was developed.
 
 To start our journy of real world churn model, We need to clarify some basic concepts and how to represent causality.
 
-## Some Basic concept: Causal Graph and SCM(Structure Causal Model)
+## 3.1 Preliminary
+### 3.1.1 Some Basic concept: Causal Graph and SCM(Structure Causal Model)
 
 Smoking leads to the deposition tar in the lung, which in turn leads to lung cancer
 
@@ -163,7 +166,7 @@ Like the causal graph, we can also use simalar graph to represent the causal-eff
 The SCM of study hours and GCSE score 
 </center>
 
-## Special Attention: Conditional Probability and Convention
+### 3.1.2 Special Attention: Conditional Probability and Convention
 We need to understand two particularly confusing concepts: conditional probability and causality
 
 Suppose there are two events, $A$ and $B$. We already observed that event $A$ has happened. How do we estimate the certainty of an event $B$ will happen? In other words, how much information can we get in estimating the $B$ on the condition that we already know the event $A$?. Mathematically, it is represented as $P(B|A)$. For example, if the doctor measured the temperature of the patient, which is $39^c$,  what is the probability that he is infected by Covid-19? The doctor wanted to know $P( infected by Covid19=Ture|temperature=39^c)$. In our churn model problem, if we know the customer has lost his job, what is the probability he will churn? What do we want to know is $P( customer will churn=Ture|lost job=Ture)$
@@ -173,7 +176,7 @@ Conditional probability shows that researcher is only the observer and recorder 
 In causality, it is another story. 
 Suppose we make the event $A$. How about the probability of event $B$ happening? In the scenario, the researcher is not only an observer; he is also a participant. He is also one part of the system to be researched. For example, a patent is very ill. He would die without seeing a doctor. But the patent decided to see a doctor.  Judea Pearl @alma991011292629705181 invented do-calculus to represent the causal inference after intervention $P(A|do(B))$.   In the churn model, the marketing department found the customer would leave. He will do something to keep him. Representation of this case as $P( retain the customer|do(intervention))$
 
-## Machine Learning and Correlation is not Causation.
+### 3.1.3 Machine Learning and Correlation is not Causation.
 In AI and machine learning, it mainly solves classification and regression. The statistical idea behind them is correlation, not causality. However, when we decide how to intervene in customer churn, we need to focus on causality rather than correlation. 
 
 For example, we can use the method of causal effect, not correlation, to analyse the effects of the military conflict between Russia and Ukraine on customer churn.
@@ -185,7 +188,10 @@ The conflict between Russia and Ukraine has raised energy price in UK and EU, wh
 ![](./images/R-U-conflict.jpg)
 
 
-## Adjustment Formula
+## 3.2 Adjustment Formula
+
+
+</div>
 
 <div style="margin-left:45px;">
 
@@ -196,11 +202,11 @@ fig.
  
 
  </div>
-## Inverse weight
+## 3.3 Inverse weight
 
-## Backdoor Criterion
+## 3.4 Backdoor Criterion
 
-## Structure Causal Model(SCM)
+## 3.5 Structure Causal Model(SCM)
 
 References
 ==============================================================================
