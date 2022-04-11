@@ -173,16 +173,27 @@ Conditional probability shows that researcher is only the observer and recorder 
 In causality, it is another story. 
 Suppose we make the event $A$. How about the probability of event $B$ happening? In the scenario, the researcher is not only an observer; he is also a participant. He is also one part of the system to be researched. For example, a patent is very ill. He would die without seeing a doctor. But the patent decided to see a doctor.  Judea Pearl @alma991011292629705181 invented do-calculus to represent the causal inference after intervention $P(A|do(B))$.   In the churn model, the marketing department found the customer would leave. He will do something to keep him. Representation of this case as $P( retain the customer|do(intervention))$
 
+## Machine Learning and Correlation is not Causation.
+In AI and machine learning, it mainly solves classification and regression. The statistical idea behind them is correlation, not causality. However, when we decide how to intervene in customer churn, we need to focus on causality rather than correlation. 
+
+For example, we can use the method of causal effect, not correlation, to analyse the effects of the military conflict between Russia and Ukraine on customer churn.
+
+In the military conflict between Russia and Ukraine, the EU and Britain supported Ukraine. However, Europe is heavily dependent on energy supply from Russia, refer to @russianoil. Therefore, Russia used energy as a weapon to threaten the dollar's position as the world's hard currency and Europe's energy supply. Please don't misunderstand me, I am just a data scientist and I want to analyze the following causal-effect and the customer churn.
+
+The conflict between Russia and Ukraine has raised energy price in UK and EU, which has led to the rising people's living costs and home energy bills. That resulted in the churn of customers with some energy companies.
+
+![](./images/R-U-conflict.jpg)
+
 
 ## Adjustment Formula
 
 <div style="margin-left:45px;">
-In the military conflict between Russia and Ukraine, the EU and Britain supported Ukraine. However, Europe is heavily dependent on energy supply from Russia, refer to @russianoil. Therefore, Russia used energy as a weapon to threaten the dollar's position as the world's hard currency and Europe's energy supply. Please don't misunderstand me, I am just a data scientist and I want to analyze the following causal-effect and the customer churn.
 
-The conflict between Russia and Ukraine has raised prices in UK and EU, that lead to the rising people's living costs and energy prices. That resulted g in the churn of customers with some energy companies.
+
+
 
 fig.
-
+ 
 
  </div>
 ## Inverse weight
@@ -192,4 +203,4 @@ fig.
 ## Structure Causal Model(SCM)
 
 References
-========================================================================================
+==============================================================================
