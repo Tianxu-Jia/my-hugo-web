@@ -186,12 +186,11 @@ In the military conflict between Russia and Ukraine, the EU and Britain supporte
 The conflict between Russia and Ukraine has raised energy price in UK and EU, which has led to the rising people's living costs and home energy bills. That resulted in the churn of customers with some energy companies.
 
 ![](./images/R-U-conflict.jpg)
-
-
-## 3.2 Adjustment Formula
-
-
 </div>
+
+## 3.2 Causal Inference from Probabilitistic Graphical Model
+
+
 
 <div style="margin-left:45px;">
 
@@ -202,11 +201,9 @@ fig.
  
 
  </div>
-## 3.3 Inverse weight
 
-## 3.4 Backdoor Criterion
 
-## 3.5 Structure Causal Model(SCM)
+## 3.3 Structure Causal Model(SCM)
 
 References
 ==============================================================================
