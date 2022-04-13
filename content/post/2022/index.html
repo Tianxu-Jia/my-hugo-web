@@ -29,10 +29,12 @@ bibliography: references.bib
 <p>Now we come back to our churn model problem. Who or which department proposed the customer churn model? Why do they need the model? Dealing with customers and caring about whether customers are lost should be the market or operation department of a company.</p>
 <p>They care about whether customers lose, but they are more concerned about what they need to do if a customer wants to lose, so as to retain the customer and maximize their business profits at the same time.</p>
 <p>Doctors who can only predict the development of the patient’s course of disease, but can not intervene in the development of the patient’s course of disease, are of little use. What the patient needs is the doctor’s effective intervention in the course of the disease. Similarly, when a company’s market or operation department puts forward a customer churn model, they are concerned about the prediction of customer churn. However, they are more concerned that when a customer wants to lose, they need to intervene, so as to retain the customer with the minimum cost and maximum profit.</p>
-<p>So, specifically, the customer churn model should be a customer churn and intervention system, as shown in Figure 1:</p>
+So, specifically, the customer churn model should be a customer churn and intervention system, as shown in Figure 1:
+<center>
 <p><img src="images/churn-intervene.jpg" /></p>
-<p>height: 450px
-name: churn-intervene</p>
+Figure 1: churn-intervene
+</center>
+<p><br></p>
 <p>Overall block diagram of churn forecast and consult service</p>
 <p>Churn model project with Commercially valuable should include:</p>
 <ol style="list-style-type: decimal">
@@ -40,10 +42,13 @@ name: churn-intervene</p>
 <li>Intervene in customers who may be retained</li>
 </ol>
 <p>This should be an iterative process in which artificial intelligence and business consulting are closely combined. Firstly, collect relevant data, establish a basic data set, predict the churning of coustomer based on this data set, and then put forward intervention suggestions to marketing/operation department. After the intervention, continue to collect data for the next round of prediction and intervention.</p>
-<p>Once we take intervention into account and build a customer churn model with business value, things will become more complicated. In the forecasting stage, the output will no longer be two categories(churning/no-churning), but four categories as shown below Figure 2:</p>
-<p><img src="images/4-classes.png" />
-name: 4-classes</p>
-<p>Classify customers into 4 groups</p>
+Once we take intervention into account and build a customer churn model with business value, things will become more complicated. In the forecasting stage, the output will no longer be two categories(churning/no-churning), but four categories as shown below Figure 2:
+<center>
+<img src="images/4-classes.png" />
+<center>
+Classify customers into 4 groups
+</center>
+</center>
 <ol style="list-style-type: decimal">
 <li>Do-Not-Disturbs(Sleeping Dog): This kind of coustomers will retain if we do nothing, otherwise, they will churn</li>
 <li>Definite leave: no matter what will happen, they will defininitly leave.</li>
@@ -98,7 +103,7 @@ y = f(x)
 </div>
 <div id="solutions-to-the-the-challenges" class="section level1">
 <h1>3. solutions to the the Challenges</h1>
-<div style="margin-left:5%; margin-right:5%;">
+<div style="margin-left:5%;">
 <p>Whether regression or classification, machine learning attempts to find the functional mapping relationship between input and output. Function mapping is essentially a kind of correlation, not causality. The aim of building churn model in business is to intervene and retain customers. Therefore, it is important to study causality and predict the consequences of intervention.</p>
 <p>Causality and intervention is an ancient problem in long history. Countless sages spent their lives trying to find some causalities. Newton discovered the causal relationship between force and acceleration. Galileo proved that the falling speed of an object has nothing to do with the mass of it through the Leaning Tower experiment of Pisa. Unfortunately, until recently, the mathematical representation of causal reasoning and intervention was put forward, and from that the the set of strict mathematical theories and methods was developed.</p>
 <p>To start our journy of real world churn model, We need to clarify some basic concepts and how to represent causality.</p>
@@ -106,30 +111,32 @@ y = f(x)
 <h2>3.1 Preliminary</h2>
 <div id="some-basic-concept-causal-graph-and-scmstructure-causal-model" class="section level3">
 <h3>3.1.1 Some Basic concept: Causal Graph and SCM(Structure Causal Model)</h3>
-<p>Smoking leads to the deposition tar in the lung, which in turn leads to lung cancer</p>
-<div class="figure">
-<img src="images/smoking.jpg" alt="" />
-<p class="caption">An example of causal graph</p>
-</div>
+Smoking leads to the deposition tar in the lung, which in turn leads to lung cancer
+<center>
+<img src="images/smoking.jpg" />
+<center>
+An example of causal graph
+</center>
+</center>
+<p><br></p>
 The events, for example, smoking, Tar and lung cancer are called node. The directed edge from node <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> reprsent the <span class="math inline">\(A\)</span> is the causal of <span class="math inline">\(B\)</span>. As the in above figure, smoking is the causal of the tar in lung. But, one may ask, tar in the must lead to lung cancer? Maybe not always! Churchill smoked heavely, but he lived to be 91 and did not die of lung cancer. There is only a probability relationship between smoking and lung cancer. That is the cause only make the result happened with some probability. We call it conditional probability <span class="math inline">\(P(B|A)\)</span>. So, we can use the probability language to represent causality relationship between causal and effect. This kind of graph is called probabilistic graphical model, is also called causal in causal graph when we want to stress the causal-effect relationship in causal inference.
 <center>
 <img src="images/churchill-smoking.jpg" />
 <br>
-<br>
 Did smoking cause Churchill had lung cancer?
 <br>
-<br>
-<br>
-<br>
 </center>
-<p>Tom and Jerry are two middle school students. They are going to take the GCSE exam. Tom works very hard. He studies eight hours a day, while Jerry plays computer games mainly. He studies in only one hour per-day. We can imagine that Tom’s test scores should be better than Jerry’s. There should be a functional relationship between GCSE scores and study hours in a statistical sense.</p>
+<p><br>
+Tom and Jerry are two middle school students. They are going to take the GCSE exam. Tom works very hard. He studies eight hours a day, while Jerry plays computer games mainly. He studies in only one hour per-day. We can imagine that Tom’s test scores should be better than Jerry’s. There should be a functional relationship between GCSE scores and study hours in a statistical sense.</p>
 <p><span class="math display">\[ GCSE \, Score = f(study \, hours) \]</span>
 Like the causal graph, we can also use simalar graph to represent the causal-effect relationship, that is called SCM(Structure Causal Model)</p>
 <center>
 <img src="images/GCSE.jpg" />
-<br>
-<br>
+</center>
+<center>
 The SCM of study hours and GCSE score
+</center>
+<p><br></p>
 </center>
 </div>
 <div id="special-attention-conditional-probability-and-convention" class="section level3">
@@ -146,12 +153,25 @@ Suppose we make the event <span class="math inline">\(A\)</span>. How about the 
 <p>For example, we can use the method of causal effect, not correlation, to analyse the effects of the military conflict between Russia and Ukraine on customer churn.</p>
 <p>In the military conflict between Russia and Ukraine, the EU and Britain supported Ukraine. However, Europe is heavily dependent on energy supply from Russia, refer to <span class="citation"><a href="#ref-russianoil" role="doc-biblioref"><span>“How Deep Is Europe’s Dependence on Russian Oil?”</span></a> (<a href="#ref-russianoil" role="doc-biblioref">n.d.</a>)</span>. Therefore, Russia used energy as a weapon to threaten the dollar’s position as the world’s hard currency and Europe’s energy supply. Please don’t misunderstand me, I am just a data scientist and I want to analyze the following causal-effect and the customer churn.</p>
 <p>The conflict between Russia and Ukraine has raised energy price in UK and EU, which has led to the rising people’s living costs and home energy bills. That resulted in the churn of customers with some energy companies.</p>
-<p><img src="images/R-U-conflict.jpg" /></p>
+<center>
+<img src="images/R-U-conflict.jpg">
+</center>
 </div>
 </div>
 </div>
 <div id="causal-inference-from-probabilitistic-graphical-model" class="section level2">
 <h2>3.2 Causal Inference from Probabilitistic Graphical Model</h2>
+<div style="margin-left:5%;">
+
+<p>AB test is kind of a causal reasoning method, but it is an experimental reasoning. Sometimes, experimental reasoning is very expensive. For the causal reasoning of people’s market behavior, it is almost impossible to do ab experiment. We need causal reasoning from observed data.</p>
+<p>Before we introduce the algorithms of causal inference based on experimental data, we first introduce some concept of PGM(probabilitistic graphical model).</p>
+<p>One directed probabilitistic graphical model is composed of set of nodes and the directed edges. One directed edge connects two nodes. It goes out from one node and into another node with and arrow. It is shown as figure below:</p>
+<center>
+<img src="images/GPM-1.jpg">
+</center>
+<center>
+Figure X: directd graph
+</center>
 <div style="margin-left:45px;">
 <p>fig.</p>
 </div>

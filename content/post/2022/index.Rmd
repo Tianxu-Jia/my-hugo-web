@@ -39,11 +39,13 @@ They care about whether customers lose, but they are more concerned about what t
 Doctors who can only predict the development of the patient's course of disease, but can not intervene in the development of the patient's course of disease, are of little use. What the patient needs is the doctor's effective intervention in the course of the disease. Similarly, when a company's market or operation department puts forward a customer churn model, they are concerned about the prediction of customer churn. However, they are more concerned that when a customer wants to lose, they need to intervene, so as to retain the customer with the minimum cost and maximum profit.
 
 So, specifically, the customer churn model should be a customer churn and intervention system, as shown in Figure 1:
-
+<center>
 ![](./images/churn-intervene.jpg)
 
-height: 450px
-name: churn-intervene
+Figure 1: churn-intervene
+</center>
+
+<br>
 
 Overall block diagram of churn forecast and consult service
 
@@ -56,12 +58,10 @@ Churn model project with Commercially valuable should include:
 This should be an iterative process in which artificial intelligence and business consulting are closely combined. Firstly, collect relevant data, establish a basic data set, predict the churning of coustomer based on this data set, and then put forward intervention suggestions to marketing/operation department. After the intervention, continue to collect data for the next round of prediction and intervention.
 
 Once we take intervention into account and build a customer churn model with business value, things will become more complicated. In the forecasting stage, the output will no longer be two categories(churning/no-churning), but four categories as shown below Figure 2:
-
+<center>
 ![](./images/4-classes.png)
-name: 4-classes
-
-Classify customers into 4 groups
-
+<center> Classify customers into 4 groups</center>
+</center>
 1. Do-Not-Disturbs(Sleeping Dog): This kind of coustomers will retain if we do nothing, otherwise, they will churn
 2. Definite leave: no matter what will happen, they will defininitly leave.
 3. Definitely Stay(Sure things): no matter what will happen, they will defininitly definitely stay.
@@ -128,7 +128,7 @@ How to make decision of intervension? Like always, we knowledge is from out past
 
 
 # 3. solutions to the the Challenges
-<div style="margin-left:5%; margin-right:5%;">
+<div style="margin-left:5%;">
 Whether regression or classification, machine learning attempts to find the functional mapping relationship between input and output. Function mapping is essentially a kind of correlation, not causality. The aim of building churn model in business is to intervene and retain customers. Therefore, it is important to study causality and predict the consequences of intervention.
 
 Causality and intervention is an ancient problem in long history. Countless sages spent their lives trying to find some causalities. Newton discovered the causal relationship between force and acceleration. Galileo proved that the falling speed of an object has nothing to do with the mass of it through the Leaning Tower experiment of Pisa. Unfortunately, until recently, the mathematical representation of causal reasoning and intervention was put forward, and from that the the set of strict mathematical theories and methods was developed.
@@ -139,31 +139,29 @@ To start our journy of real world churn model, We need to clarify some basic con
 ### 3.1.1 Some Basic concept: Causal Graph and SCM(Structure Causal Model)
 
 Smoking leads to the deposition tar in the lung, which in turn leads to lung cancer
-
-![An example of causal graph](./images/smoking.jpg)
+<center>
+![](./images/smoking.jpg)
+<center>An example of causal graph</center>
+</center>
+<br>
 
 The events, for example, smoking, Tar and lung cancer are called node. The directed edge from node $A$ to $B$ reprsent the $A$ is the causal of $B$. As the in above figure, smoking is the causal of the tar in lung.  But, one may ask, tar in the must lead to lung cancer? Maybe not always! Churchill smoked heavely, but he lived to be 91 and did not die of lung cancer. There is only a probability relationship between smoking and lung cancer. That is the cause only make the result happened with some probability. We call it conditional probability $P(B|A)$. So, we can use the probability language to represent causality relationship between causal and effect. This kind of graph is called probabilistic graphical model, is also called causal in causal graph when we want to stress the causal-effect relationship in causal inference.
 <center>
 ![](./images/churchill-smoking.jpg)
 <br>
-<br>
 Did smoking cause Churchill had lung cancer?
 <br>
-<br>
-<br>
-<br>
 </center>
-
+<br>
 Tom and Jerry are two middle school students. They are going to take the GCSE exam. Tom works very hard. He studies eight hours a day, while Jerry plays computer games mainly. He studies in only one hour per-day. We can imagine that Tom's test scores should be better than Jerry's. There should be a functional relationship between GCSE scores and study hours in a statistical sense.
 
 $$ GCSE \, Score = f(study \, hours) $$
 Like the causal graph, we can also use simalar graph to represent the causal-effect relationship, that is called SCM(Structure Causal Model)
 
-<center>
-![](./images/GCSE.jpg)
+<center>![](./images/GCSE.jpg)</center>
+<center>The SCM of study hours and GCSE score</center>
 <br>
-<br>
-The SCM of study hours and GCSE score 
+
 </center>
 
 ### 3.1.2 Special Attention: Conditional Probability and Convention
@@ -185,10 +183,23 @@ In the military conflict between Russia and Ukraine, the EU and Britain supporte
 
 The conflict between Russia and Ukraine has raised energy price in UK and EU, which has led to the rising people's living costs and home energy bills. That resulted in the churn of customers with some energy companies.
 
-![](./images/R-U-conflict.jpg)
+<center><img src="./images/R-U-conflict.jpg"></center>
+
 </div>
 
 ## 3.2 Causal Inference from Probabilitistic Graphical Model
+
+<div style="margin-left:5%;">
+
+AB test is kind of a causal reasoning method, but it is an experimental reasoning. Sometimes, experimental reasoning is very expensive. For the causal reasoning of people's market behavior, it is almost impossible to do ab experiment. We need causal reasoning from observed data.
+
+Before we introduce the algorithms of causal inference based on experimental data, we first introduce some concept of PGM(probabilitistic graphical model).
+
+One directed probabilitistic graphical model is composed of set of nodes and the directed edges. One directed edge connects two nodes. It goes out from one node and into another node with and arrow. It is shown as figure below:
+
+<center><img src="./images/GPM-1.jpg"></center>
+<center>Figure X: directd graph</center>
+
 
 
 
